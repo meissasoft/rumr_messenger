@@ -187,6 +187,8 @@ def test_message_broadcasting_function_call(mock_send, client, session, test_dat
 
 
 
+
+
 # Test handling invalid JSON
 def test_invalid_json_message(client, session, test_data):
     with client.websocket_connect(f"/messenger/ws/user1") as websocket:
