@@ -41,7 +41,7 @@ fastapi run app/app.py --reload
 - SQLModel - ORM for SQL databases with Python type annotations
 - MySQL - Database backend
 - pytest - Testing framework
-```
+
 
 ## Development
 
