@@ -5,7 +5,7 @@ import json
 from datetime import datetime, timezone
 
 from app.database import get_db
-from app.models.message import Message
+from app.models.message import Message,save_message
 from app.models.conversation import Conversation
 from app.models.conversation_participant import ConversationParticipant
 from app.models.blocked_user import BlockedUser, check_block_status
