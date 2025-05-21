@@ -3,7 +3,6 @@ from fastapi import WebSocket
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 from app.models.user import User
-from app.models.blocked_user import BlockedUser,check_block_status
 from app.models.conversation import Conversation
 from app.models.conversation_participant import ConversationParticipant
 from app.models.message_response import MessageResponse
@@ -86,14 +85,6 @@ class ConnectionManager:
             if recipient_id not in self.active_connections:
                 continue
                 
-            
-            creator_blocked_participant = False
-            participant_blocked_creator = False
-            
-            # # Additional block checks with conversation creator
-            # if conversation_creator_id != sender_id and conversation_creator_id != recipient_id:
-            #     creator_blocked_participant = check_block_status(db, conversation_creator_id, recipient_id)
-            #     participant_blocked_creator = check_block_status(db, recipient_id, conversation_creator_id)
             
                 
             # Send the enriched message data to this participant
