@@ -37,7 +37,6 @@ class ConnectionManager:
 
         if not conversation:
             return MessageResponse()
-        print(conversation.user_id)
             
         conversation_creator_id = conversation.user_id
         
@@ -80,7 +79,6 @@ class ConnectionManager:
         
         # Send to each active participant
         for participant in participants:
-            print(participant.user_id)
             recipient_id = participant.user_id
           
                 

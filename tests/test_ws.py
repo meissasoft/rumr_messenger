@@ -13,7 +13,7 @@ from app.models.conversation import Conversation
 from app.models.conversation_participant import ConversationParticipant
 from app.models.blocked_user import BlockedUser
 from app.models.user import User
-from app.routers.messenger import manager
+from app.routers.websocket import manager
 from sqlmodel import select 
 import websockets.exceptions
 import time
@@ -127,7 +127,7 @@ def receive_json_with_timeout(websocket, timeout_seconds=5):
     raise TimeoutError(f"WebSocket receive timed out after {timeout_seconds} seconds")
 
 # Test sending a message through WebSocket
-def test_websocket_send_message(client, session, test_data):
+def test_websocket_send_message_was_saved_to_database(client, session, test_data):
     with client.websocket_connect(f"/messenger/ws/user1") as websocket:
         # Send a message
         message_data = {
@@ -161,7 +161,7 @@ def test_unauthorized_conversation(client, session, test_data):
 
 # Test broadcasting behavior with multiple clients
 @patch('app.routers.messenger.ConnectionManager.send_message_to_user_using_websocket')
-def test_message_broadcasting(mock_send, client, session, test_data):
+def test_message_broadcasting_function_call(mock_send, client, session, test_data):
     # Setup mock for send_personal_message
     loop = asyncio.get_event_loop()
     mock_send.return_value = loop.create_future()
