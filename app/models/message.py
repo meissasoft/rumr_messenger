@@ -3,6 +3,7 @@ from typing import Optional
 from datetime import datetime
 import uuid
 from datetime import datetime, timezone
+from sqlmodel import Session, select
 
 
 
@@ -18,3 +19,20 @@ class Message(SQLModel, table=True):
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc), nullable=False)
     image_key: Optional[str] = Field(default=None, max_length=255)
 
+
+def save_message(db: Session, conversation_id: str, sender_id: str, content: str, msg_type: str = "text") -> Message:
+    """Save a message to the database and return the created message"""
+    message = Message(
+        conversation_id=conversation_id,
+        sender_id=sender_id,
+        content=content,
+        type=msg_type,
+        status=True,
+        created_at=datetime.now(timezone.utc)
+    )
+    db.add(message)
+    # Commit only once, don't refresh immediately
+    db.commit()
+    # Removed db.refresh(message) here
+    db.refresh(message)
+    return message

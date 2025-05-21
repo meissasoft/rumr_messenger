@@ -16,33 +16,8 @@ router = APIRouter()
 # Track all connections with an instance of the manager
 manager = ConnectionManager()
 
-# Helper function to check if one user has blocked another
-def check_block_status(db: Session, blocker_id: str, blocked_id: str) -> bool:
-    """Check if blocker_id has blocked blocked_id"""
-    block = db.exec(
-        select(BlockedUser).where(
-            BlockedUser.blocker_id == blocker_id,
-            BlockedUser.blocked_id == blocked_id
-        )
-    ).first()
-    return block is not None
 
-def save_message(db: Session, conversation_id: str, sender_id: str, content: str, msg_type: str = "text") -> Message:
-    """Save a message to the database and return the created message"""
-    message = Message(
-        conversation_id=conversation_id,
-        sender_id=sender_id,
-        content=content,
-        type=msg_type,
-        status=True,
-        created_at=datetime.now(timezone.utc)
-    )
-    db.add(message)
-    # Commit only once, don't refresh immediately
-    db.commit()
-    # Removed db.refresh(message) here
-    db.refresh(message)
-    return message
+
 
 @router.websocket("/{user_id}")
 async def websocket_endpoint(
