@@ -49,5 +49,5 @@ fastapi run app/app.py --reload
 
 ## API Documentation
 
-Once the application is running, you can access the auto-generated API documentation at:
-- Swagger UI: http://localhost:8000/docs
+Once the application is running, you can access the websocket using:
+- Websocket: ws://localhost:8000/ws/{user_id}
