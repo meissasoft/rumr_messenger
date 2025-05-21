@@ -208,3 +208,4 @@ def test_websocket_disconnect(client, test_data):
     # After the context manager exits, connection should be closed
     # and removed from manager
     assert "user1" not in manager.active_connections
+

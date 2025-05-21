@@ -43,9 +43,6 @@ fastapi run app/app.py --reload
 - pytest - Testing framework
 
 
-## Development
-
-[Add development instructions here]
 
 ## API Documentation
 
