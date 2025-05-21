@@ -44,7 +44,7 @@ def save_message(db: Session, conversation_id: str, sender_id: str, content: str
     db.refresh(message)
     return message
 
-@router.websocket("/ws/{user_id}")
+@router.websocket("/{user_id}")
 async def websocket_endpoint(
     websocket: WebSocket, 
     user_id: str, 
